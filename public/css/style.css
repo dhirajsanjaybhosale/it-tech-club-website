@@ -1,0 +1,302 @@
+/* ================= ROOT COLORS ================= */
+:root {
+  --bg-dark: #0f172a;
+  --bg-light: #1e293b;
+  --accent: #facc15;
+  --accent2: #f97316;
+  --text-light: #e2e8f0;
+}
+
+/* ================= GLOBAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* ================= NAVBAR ================= */
+.custom-navbar {
+  background: transparent;
+  transition: 0.4s ease;
+  padding: 15px 0;
+}
+
+.custom-navbar.scrolled {
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+}
+
+.navbar-nav .nav-link {
+  color: var(--text-light) !important;
+  margin-left: 20px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--accent) !important;
+}
+
+/* ================= HERO ================= */
+.hero {
+  height: 100vh;
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #000);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.hero-title {
+  font-size: 60px;
+  font-weight: 800;
+  background: linear-gradient(45deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  margin-top: 15px;
+  font-size: 20px;
+  opacity: 0.9;
+}
+
+.hero-btn {
+  margin-top: 30px;
+  padding: 12px 35px;
+  border-radius: 50px;
+  background: linear-gradient(45deg, var(--accent), var(--accent2));
+  border: none;
+  color: black;
+  font-weight: 600;
+  transition: 0.4s;
+  box-shadow: 0 0 30px rgba(250,204,21,0.5);
+}
+
+.hero-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 45px rgba(250,204,21,0.9);
+}
+
+/* ================= SECTIONS ================= */
+.section-dark {
+  padding: 100px 20px;
+  background: var(--bg-light);
+  text-align: center;
+}
+
+.section-light {
+  padding: 100px 20px;
+  background: var(--bg-dark);
+}
+
+.section-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 30px;
+}
+
+.section-text {
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.8;
+  opacity: 0.85;
+}
+
+/* ================= GLASS CARD ================= */
+.event-card,
+.team-card,
+.auth-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.4s ease;
+}
+
+.event-card:hover,
+.team-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.event-card h4 {
+  color: var(--accent);
+}
+
+/* ================= AUTH ================= */
+.login-bg,
+.signup-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(-45deg, #1e3c72, #2a5298, #000428, #004e92);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+.auth-card {
+  width: 420px;
+  box-shadow: 0 0 50px rgba(0,0,0,0.6);
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--text-light);
+  color: var(--text-light);
+  outline: none;
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(45deg, var(--accent), var(--accent2));
+  transition: 0.4s;
+}
+
+.signup-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(250,204,21,0.7);
+}
+
+/* ================= GALLERY ================= */
+.gallery-item img {
+  border-radius: 15px;
+  transition: 0.4s;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+/* ================= TEAM ================= */
+.team-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  background: #020617;
+  padding: 70px 0 20px;
+}
+
+.footer a {
+  color: #aaa;
+  transition: 0.3s;
+}
+
+.footer a:hover {
+  color: var(--accent);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .auth-card {
+    width: 90%;
+  }
+}
+/* ================= AUTH PAGE FIX ================= */
+
+.auth-page {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px;
+}
+
+.auth-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 20px;
+    width: 380px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #facc15;
+    font-weight: 600;
+}
+
+.custom-input {
+    background: rgba(255,255,255,0.08) !important;
+    border: none !important;
+    color: white !important;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.custom-input::placeholder {
+    color: #ccc;
+}
+
+.custom-input:focus {
+    box-shadow: 0 0 10px #facc15;
+}
+
+/* ================= FOOTER FIX ================= */
+
+.footer {
+    background: #0b1220;
+    width: 100%;
+}
+
+footer {
+    width: 100%;
+}
