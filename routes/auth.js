@@ -4,6 +4,16 @@ const db = require("../config/db");
 
 const router = express.Router();
 
+/* ================= GET LOGIN ================= */
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
+/* ================= GET SIGNUP ================= */
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
 /* ================= SIGNUP ================= */
 router.post("/signup", async (req, res) => {
   try {
@@ -13,9 +23,7 @@ router.post("/signup", async (req, res) => {
       return res.render("signup", { error: "All fields are required" });
     }
 
-    // Check if email exists
     db.query("SELECT * FROM users WHERE email = ?", [email], async (err, results) => {
-
       if (err) {
         console.log(err);
         return res.render("signup", { error: "Database error" });
@@ -36,7 +44,7 @@ router.post("/signup", async (req, res) => {
             return res.render("signup", { error: "Registration failed" });
           }
 
-          res.redirect("/login");
+          res.redirect("/auth/login");
         }
       );
     });
@@ -47,10 +55,8 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-
 /* ================= LOGIN ================= */
 router.post("/login", (req, res) => {
-
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -72,14 +78,12 @@ router.post("/login", (req, res) => {
       }
 
       const user = results[0];
-
       const validPassword = await bcrypt.compare(password, user.password);
 
       if (!validPassword) {
         return res.render("login", { error: "Invalid password" });
       }
 
-      // Save minimal user data in session
       req.session.user = {
         user_id: user.user_id,
         name: user.name,
@@ -87,7 +91,6 @@ router.post("/login", (req, res) => {
         role: user.role || "student"
       };
 
-      // Redirect based on role
       if (req.session.user.role === "admin") {
         return res.redirect("/admin");
       }
@@ -96,7 +99,6 @@ router.post("/login", (req, res) => {
     }
   );
 });
-
 
 /* ================= LOGOUT ================= */
 router.get("/logout", (req, res) => {

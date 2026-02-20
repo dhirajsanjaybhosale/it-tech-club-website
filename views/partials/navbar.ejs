@@ -10,15 +10,14 @@
       </div>
     </a>
 
-    <!-- Toggle Button -->
+    <!-- Toggle -->
     <button class="navbar-toggler bg-light" type="button"
-        data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false"
-        aria-label="Toggle navigation">
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Nav Links -->
+    <!-- Links -->
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav align-items-center">
 
@@ -46,38 +45,66 @@
           <a class="nav-link" href="/contact">Contact</a>
         </li>
 
-        <!-- If User Logged In -->
         <% if(user){ %>
 
+        <!-- 🔔 Notifications -->
+        <li class="nav-item dropdown ms-3">
+          <a class="nav-link position-relative"
+             href="#"
+             role="button"
+             data-bs-toggle="dropdown">
+            🔔
+            <span class="notification-badge">2</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item">New Event Added</a></li>
+            <li><a class="dropdown-item">Registration Open</a></li>
+          </ul>
+        </li>
+
+        <!-- 👤 Profile -->
+        <li class="nav-item dropdown ms-2">
+          <a class="nav-link dropdown-toggle d-flex align-items-center"
+             href="#"
+             role="button"
+             data-bs-toggle="dropdown">
+            👤 <span class="ms-2"><%= user.name %></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+
             <% if(user.role === "admin"){ %>
-                <li class="nav-item ms-3">
-                  <a href="/admin" class="btn btn-warning btn-sm">Admin</a>
-                </li>
+              <li><a class="dropdown-item" href="/admin">Admin Panel</a></li>
             <% } %>
 
-            <li class="nav-item ms-3">
-              <a href="/dashboard" class="btn btn-info btn-sm">Dashboard</a>
+            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item text-danger" href="/auth/logout">
+                Logout
+              </a>
             </li>
 
-            <li class="nav-item ms-2">
-              <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
-            </li>
+          </ul>
+        </li>
 
         <% } else { %>
 
-            <!-- If Not Logged In -->
-            <li class="nav-item ms-3">
-              <a href="/login" class="btn btn-outline-light btn-sm">Login</a>
-            </li>
+        <!-- Guest -->
+        <li class="nav-item ms-3">
+          <a href="/auth/login" class="btn btn-outline-light btn-sm">
+            Login
+          </a>
+        </li>
 
-            <li class="nav-item ms-2">
-              <a href="/signup" class="btn btn-warning btn-sm">Signup</a>
-            </li>
+        <li class="nav-item ms-2">
+          <a href="/auth/signup" class="btn btn-warning btn-sm">
+            Signup
+          </a>
+        </li>
 
         <% } %>
 
       </ul>
     </div>
-
   </div>
 </nav>

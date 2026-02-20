@@ -10,21 +10,31 @@
 
 <%- include('partials/navbar') %>
 
-<div class="container py-5">
+<!-- Hero Section -->
+<section class="gallery-hero text-center text-white d-flex align-items-center">
+    <div class="container">
+        <h1>Gallery</h1>
+        <p class="lead">Memories • Moments • Achievements 📸</p>
+    </div>
+</section>
 
-    <h2 class="text-center mb-5">Gallery</h2>
+<div class="container py-5">
 
     <div class="row">
 
         <% for(let i = 1; i <= 6; i++) { %>
 
-            <div class="col-md-4 col-sm-6 mb-4">
-                <div class="gallery-item">
-                    <img src="/images/sample<%= i %>.jpg"
-                         class="img-fluid rounded shadow"
-                         alt="Gallery Image <%= i %>">
+        <div class="col-md-4 col-sm-6 mb-4 reveal">
+            <div class="gallery-item">
+                <img src="/images/sample<%= i %>.jpg"
+                     class="img-fluid"
+                     alt="Gallery Image <%= i %>"
+                     onclick="openModal(this.src)">
+                <div class="overlay">
+                    <span>View Image</span>
                 </div>
             </div>
+        </div>
 
         <% } %>
 
@@ -32,7 +42,15 @@
 
 </div>
 
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal" onclick="closeModal()">
+    <img id="modalImage">
+</div>
+
 <%- include('partials/footer') %>
+
+<script src="/js/reveal.js"></script>
+<script src="/js/gallery.js"></script>
 
 </body>
 </html>

@@ -13,14 +13,14 @@ const adminRoutes = require("./routes/admin");
 
 const app = express();
 
-/* ===== VIEW ENGINE ===== */
+/* ================= VIEW ENGINE ================= */
 app.set("view engine", "ejs");
 
-/* ===== MIDDLEWARE ===== */
+/* ================= MIDDLEWARE ================= */
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/* ===== SESSION ===== */
+/* ================= SESSION ================= */
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "secretkey",
@@ -29,55 +29,59 @@ app.use(
   })
 );
 
-/* ===== GLOBAL USER VARIABLE ===== */
+/* ================= GLOBAL USER ================= */
 app.use((req, res, next) => {
   res.locals.user = req.session.user;
   next();
 });
 
-/* ===== ROUTES ===== */
-app.use("/", authRoutes);
+/* ================= ROUTES ================= */
+
+/* 🔹 Auth Routes */
+app.use("/auth", authRoutes);
+
+/* 🔹 Other Routes */
 app.use("/events", eventRoutes);
 app.use("/clubs", clubRoutes);
 app.use("/admin", adminRoutes);
 
-/* ===== HOME (Dynamic Events) ===== */
+/* ================= HOME ================= */
 app.get("/", (req, res) => {
-  db.query("SELECT * FROM events ORDER BY date DESC LIMIT 3", (err, results) => {
-    if (err) {
-      console.log(err);
-      return res.render("index", { events: [] });
-    }
+  db.query(
+    "SELECT * FROM events ORDER BY date DESC LIMIT 3",
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.render("index", { events: [] });
+      }
 
-    res.render("index", { events: results });
-  });
+      res.render("index", { events: results });
+    }
+  );
 });
 
-/* ===== STATIC PAGES ===== */
-app.get("/login", (req, res) => res.render("login"));
-app.get("/signup", (req, res) => res.render("signup"));
+/* ================= STATIC PAGES ================= */
 app.get("/about", (req, res) => res.render("about"));
 app.get("/contact", (req, res) => res.render("contact"));
 app.get("/gallery", (req, res) => res.render("gallery"));
 app.get("/team", (req, res) => res.render("team"));
 
-/* ===== CONTACT FORM ===== */
+/* ================= CONTACT FORM ================= */
 app.post("/contact", (req, res) => {
   const { name, email, message } = req.body;
   console.log(name, email, message);
   res.send("Message received successfully!");
 });
 
-/* ===== DASHBOARD (Protected) ===== */
+/* ================= DASHBOARD ================= */
 app.get("/dashboard", (req, res) => {
   if (!req.session.user) {
-    return res.redirect("/login");
+    return res.redirect("/auth/login");
   }
-
   res.render("dashboard");
 });
 
-/* ===== SERVER ===== */
+/* ================= SERVER ================= */
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
 });
