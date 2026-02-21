@@ -11,7 +11,7 @@
 <%- include('partials/navbar') %>
 
 <!-- Dashboard Hero -->
-<section class="dashboard-hero text-center text-white d-flex align-items-center">
+<section class="dashboard-hero text-center text-white d-flex align-items-center justify-content-center">
     <div class="container">
         <h1>Welcome, <%= user ? user.name : "Student" %> 👋</h1>
         <p class="lead">Explore • Register • Grow 🚀</p>
@@ -39,7 +39,7 @@
             <div class="dashboard-card text-center h-100 p-4">
                 <h5 class="fw-bold">Explore Events</h5>
                 <p>Discover upcoming technical events.</p>
-                <a href="/events" class="btn btn-info">
+                <a href="/events" class="btn btn-gradient">
                     Browse Events
                 </a>
             </div>
